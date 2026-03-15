@@ -14,10 +14,10 @@ pipeline {
                 set -e
 
                 echo "Installing Gitleaks..."
-                wget -q https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -O gitleaks
-                chmod +x gitleaks
-                sudo mv gitleaks /usr/local/bin/gitleaks
-
+                wget https://github.com/gitleaks/gitleaks/releases/download/v8.18.0/gitleaks_8.18.0_linux_x64.tar.gz
+                tar -xvzf gitleaks_8.18.0_linux_x64.tar.gz
+                sudo mv gitleaks /usr/local/bin/
+                echo "Gitleaks installed successfully."
                 echo "Installing Trivy..."
                 sudo apt-get update -y
                 sudo apt-get install -y wget apt-transport-https gnupg lsb-release
@@ -27,7 +27,7 @@ pipeline {
 
                 sudo apt-get update -y
                 sudo apt-get install -y trivy
-
+                echo "Gitleaks installed successfully."
                 echo "Installed versions:"
                 gitleaks version
                 trivy --version
