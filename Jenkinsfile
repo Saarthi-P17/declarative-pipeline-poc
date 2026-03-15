@@ -53,34 +53,27 @@ pipeline {
     }
 
     post {
-
         success {
-            echo "Pipeline completed successfully."
-
-            mail to: 'msmukeshkumarsharma95@gmail.com',
-            subject: "Pipeline Success",
-            body: "Build completed successfully."
-
-            // Slack notification for success
-            slackSend (
+            slackSend(
                 channel: '#ci-operation-notifications',
-                color: 'good',
-                message: "SUCCESS: Job ${env.JOB_NAME} Build ${env.BUILD_NUMBER} succeeded. ${env.BUILD_URL}"
+                message: """
+                Build Successful
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                URL: ${env.BUILD_URL}
+                """
             )
         }
 
         failure {
-            echo "Pipeline failed."
-
-            mail to: 'msmukeshkumarsharma95@gmail.com',
-            subject: "Pipeline Failed",
-            body: "Security checks failed."
-
-            // Slack notification for failure
-            slackSend (
+            slackSend(
                 channel: '#ci-operation-notifications',
-                color: 'danger',
-                message: "FAILED: Job ${env.JOB_NAME} Build ${env.BUILD_NUMBER} failed. ${env.BUILD_URL}"
+                message: """
+                Build Failed
+                Job: ${env.JOB_NAME}
+                Build: #${env.BUILD_NUMBER}
+                URL: ${env.BUILD_URL}
+                """
             )
         }
 
