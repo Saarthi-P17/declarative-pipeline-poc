@@ -59,7 +59,7 @@ node {
             trivy fs \
             --scanners license \
             --format table \
-            --output ${REPORT_DIR}/trivy-license-report.serif \
+            --output ${REPORT_DIR}/trivy-license-report.sarif \
             .
             """
         }
