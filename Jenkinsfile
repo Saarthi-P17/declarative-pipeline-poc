@@ -78,6 +78,7 @@ pipeline {
         }
 
         always {
+            cleanWs()
             archiveArtifacts artifacts: 'reports/*', fingerprint: true
         }
     }
